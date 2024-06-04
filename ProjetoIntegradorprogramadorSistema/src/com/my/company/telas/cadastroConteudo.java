@@ -5,7 +5,9 @@
 package com.my.company.telas;
 
 import com.mycompany.dao.daoConteudo;
+import com.mycompany.modelo.modeloConteudo;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.Temporarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,15 +24,50 @@ public class cadastroConteudo extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         
+        jtfIdConteudo.setEditable(false);
+        jtfIdConteudo.setEnabled(false);
+        
+            if(!verificarDadosTemporarios()){
             daoConteudo daoCont = new daoConteudo();
-            jtfIdConteudo.setText(String.valueOf(daoCont.ProximoIdConteudo()));
-            jtfIdConteudo.setEnabled(false);
+            
+            int id = daoCont.ProximoIdConteudo();
+            if(id >= 0)
+                jtfIdConteudo.setText(String.valueOf(id));
+                
+                jbtSalvarOrAdd.setText("Salvar");
+                jbtnDelete.setVisible(false);
+        }
+            else{
+                jbtSalvarOrAdd.setText("Alterar");
+                jbtnDelete.setVisible(true);
+            }
+    }
+    
+    private Boolean verificarDadosTemporarios(){
+        if(Temporarios.TempObject instanceof modeloConteudo){
+            int id = ((modeloConteudo) Temporarios.TempObject).getId();
+            String nome = ((modeloConteudo) Temporarios.TempObject).getNome();
+            int id_categoria = ((modeloConteudo) Temporarios.TempObject).getId_categoria();
+            int id_genero = ((modeloConteudo) Temporarios.TempObject).getId_genero();
+            
+            jtfIdConteudo.setText(String.valueOf(id));
+            jtfNomeConteudo.setText(String.valueOf(nome));
+            jcbCategoria.setSelectedIndex(id_categoria);
+            jcbGenero.setSelectedIndex(id_genero);
+            
+            Temporarios.TempObject = null;
+            
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     private void addConteudo(){
         daoConteudo daoCont = new daoConteudo();
         
-        if(daoCont.inserir(Integer.parseInt(jtfIdConteudo.getText()), String.valueOf(jtfNomeConteudo), jcbCategoria.getSelectedIndex(), jcbGenero.getSelectedIndex())){
+        if(daoCont.inserir(Integer.parseInt(jtfIdConteudo.getText()), String.valueOf(jtfNomeConteudo.getText()), jcbCategoria.getSelectedIndex(), jcbGenero.getSelectedIndex())){
             jtfIdConteudo.setText(String.valueOf(daoCont.ProximoIdConteudo()));
             jcbCategoria.setSelectedIndex(0);
             jcbGenero.setSelectedIndex(0);
@@ -40,6 +77,9 @@ public class cadastroConteudo extends javax.swing.JFrame {
         }
         else{
             jtfIdConteudo.setText(String.valueOf(daoCont.ProximoIdConteudo()));
+            jcbCategoria.setSelectedIndex(0);
+            jcbGenero.setSelectedIndex(0);
+            jtfNomeConteudo.setText("");
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir conteúdo");
         }
     }
@@ -62,7 +102,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jbtSalvarOrAdd = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jbtnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcbGenero = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -77,7 +117,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Nome do conteudo");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
@@ -129,11 +169,11 @@ public class cadastroConteudo extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton4.setText("Excluir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jbtnDelete.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbtnDelete.setText("Excluir");
+        jbtnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jbtnDeleteActionPerformed(evt);
             }
         });
 
@@ -150,6 +190,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("ID");
 
+        jtfIdConteudo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jtfIdConteudo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfIdConteudoActionPerformed(evt);
@@ -170,7 +211,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jbtSalvarOrAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -210,7 +251,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtSalvarOrAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -246,9 +287,9 @@ public class cadastroConteudo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed
         // TODO add your handling code here:
@@ -318,7 +359,6 @@ public class cadastroConteudo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -327,6 +367,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbtSalvarOrAdd;
+    private javax.swing.JButton jbtnDelete;
     private javax.swing.JComboBox<String> jcbCategoria;
     private javax.swing.JComboBox<String> jcbGenero;
     private javax.swing.JTextField jtfIdConteudo;

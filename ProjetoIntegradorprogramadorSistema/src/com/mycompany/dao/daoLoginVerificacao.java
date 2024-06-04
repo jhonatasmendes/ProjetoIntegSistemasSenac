@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author liberalino.1980
  */
-public class daoLoginVerificacao {
+public class daoLoginVerificacao extends BancoDeDadosMySql{
           
       public boolean verificarLoginAdm(String usuario, String senha) {
         boolean verificacaoLogin = false;

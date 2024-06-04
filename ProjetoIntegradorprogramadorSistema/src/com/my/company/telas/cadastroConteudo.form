@@ -17,7 +17,7 @@
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -74,7 +74,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jbtSalvarOrAdd" min="-2" pref="141" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton4" min="-2" pref="102" max="-2" attributes="0"/>
+                                  <Component id="jbtnDelete" min="-2" pref="102" max="-2" attributes="0"/>
                                   <EmptySpace pref="168" max="32767" attributes="0"/>
                                   <Component id="jButton2" min="-2" pref="102" max="-2" attributes="0"/>
                               </Group>
@@ -124,7 +124,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton2" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jbtSalvarOrAdd" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                      <Component id="jbtnDelete" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -196,7 +196,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="jbtnDelete">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
@@ -204,7 +204,7 @@
             <Property name="text" type="java.lang.String" value="Excluir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnDeleteActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -245,6 +245,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtfIdConteudo">
+          <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+          </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfIdConteudoActionPerformed"/>
           </Events>

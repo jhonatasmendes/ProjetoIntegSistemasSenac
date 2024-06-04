@@ -4,6 +4,11 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.dao.daoConteudo;
+import com.mycompany.utilidades.Formularios;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author liberalino.1980
@@ -15,6 +20,102 @@ public class tabelaConteudo extends javax.swing.JFrame {
      */
     public tabelaConteudo() {
         initComponents();
+        setExtendedState(MAXIMIZED_BOTH);
+        setResizable(false);
+    }
+    
+    public void listarUsuarios(){
+        try{
+            DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableConteudo.getModel();
+            
+            jTableConteudo.setModel(defaulttablemodel);
+            
+            daoConteudo daoCont = new daoConteudo();
+            
+            ResultSet resultSet = daoCont.SelecionarTodos();
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultSet.next()){
+                String id = resultSet.getString(1);
+                String nome = resultSet.getString(2);
+                String sobrenome = resultSet.getString(3);
+                
+                defaulttablemodel.addRow(new Object[]{id, nome,});
+            }  
+        }
+        catch(Exception e){
+            
+        }
+    }
+    
+    public void listarUsuarioId(int conteudoId){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            
+            jTableConteudo.setModel(defaulttablemodel);
+            
+            daoConteudo daoCont = new daoConteudo();
+            
+            ResultSet resultset = daoCont.SelecionarPorId(conteudoId);
+            
+            defaulttablemodel.setRowCount(0);
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String sobrenome = resultset.getString(3);
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarUsuarioNome(String conteudoNome){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            
+            jTableConteudo.setModel(defaulttablemodel);
+            
+            daoConteudo daoCont = new daoConteudo();
+            
+            ResultSet resultset = daoCont.SelecionarPorConteudo(conteudoNome);
+            
+            defaulttablemodel.setRowCount(0);
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String sobrenome = resultset.getString(3);
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+        public void listarUsuarioSobrenome(String categoriaNome){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            
+            jTableConteudo.setModel(defaulttablemodel);
+            
+            daoConteudo daoCont = new daoConteudo();
+            
+            ResultSet resultset = daoCont.SelecionarPorCategoria(categoriaNome);
+            
+            defaulttablemodel.setRowCount(0);
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String sobrenome = resultset.getString(3);
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -32,11 +133,16 @@ public class tabelaConteudo extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTableConteudo = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Canais", "Filmes", "Series", "Jogos" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -55,8 +161,8 @@ public class tabelaConteudo extends javax.swing.JFrame {
 
         jButton1.setText("Filtrar");
 
-        jTable1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableConteudo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableConteudo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -72,7 +178,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTableConteudo);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Para editar ou remover algum conteúdo: ");
@@ -144,6 +250,10 @@ public class tabelaConteudo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        Formularios.tabelaConteudo = null;
+    }//GEN-LAST:event_formWindowClosed
+
     /**
      * @param args the command line arguments
      */
@@ -187,7 +297,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableConteudo;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

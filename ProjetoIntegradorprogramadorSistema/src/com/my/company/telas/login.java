@@ -6,6 +6,8 @@ package com.my.company.telas;
 
 import com.mycompany.dao.daoConteudo;
 import com.mycompany.dao.daoLoginVerificacao;
+import com.mycompany.utilidades.BancoDeDadosMySql;
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.JOptionPane;
 
@@ -20,6 +22,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        BancoDeDadosMySql.conectar();
         setLocationRelativeTo(null);
         setResizable(false);
     }
@@ -190,30 +193,44 @@ public class login extends javax.swing.JFrame {
         String userNome = jtfUsuario.getText();
         String userSenha = jtfSenha.getText();
         
-        if (Formularios.menu == null && verificarLoginADM(userNome, userSenha)) {
-            JOptionPane.showMessageDialog(null, "Logado como administrado.");
-            String mode = "adm";
-            Formularios.menu = new menu("ADMINISTRADOR");
+        if (verificarLoginADM(userNome, userSenha)) {
+            JOptionPane.showMessageDialog(null, "Logado como administrador.");
+            Constantes.LOGIN_TYPE = Constantes.LOGIN_ADM;
+
             this.dispose();
-            Formularios.menu.setVisible(true);
             jtfUsuario.setText("");
             jtfSenha.setText("");
+            
+            if(Formularios.menu == null)
+            Formularios.menu = new menu();
+            
+        Formularios.menu.setVisible(true);
         }
-        else if (Formularios.menu == null && verificarLoginVendedor(userNome, userSenha)) {
+        else if (verificarLoginVendedor(userNome, userSenha)) {
             JOptionPane.showMessageDialog(null, "Logado como vendedor.");
-            Formularios.menu = new menu("VENDEDOR");
+            Constantes.LOGIN_TYPE = Constantes.LOGIN_VENDEDOR;
+
             this.dispose();
-            Formularios.menu.setVisible(true);
             jtfUsuario.setText("");
             jtfSenha.setText("");
+            
+            if(Formularios.menu == null)
+            Formularios.menu = new menu();
+            
+        Formularios.menu.setVisible(true);
         }
-        else if (Formularios.menu == null && verificarLoginCliente(userNome, userSenha)) {
+        else if (verificarLoginCliente(userNome, userSenha)) {
             JOptionPane.showMessageDialog(null, "Logado como cliente.");
-            Formularios.menu = new menu("CLIENTE");
+            Constantes.LOGIN_TYPE = Constantes.LOGIN_CLIENTE;
+            
             this.dispose();
-            Formularios.menu.setVisible(true);
             jtfUsuario.setText("");
             jtfSenha.setText("");
+            
+            if(Formularios.menu == null)
+            Formularios.menu = new menu();
+            
+        Formularios.menu.setVisible(true);
         }
         else {
             JOptionPane.showMessageDialog(null, "Nome de usuário ou senha incorretos.");

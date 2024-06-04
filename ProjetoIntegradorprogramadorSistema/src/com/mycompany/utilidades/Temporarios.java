@@ -4,21 +4,10 @@
  */
 package com.mycompany.utilidades;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author liberalino.1980
  */
-public class Formularios {
-    public static JFrame menu;
-    
-    public static JFrame login;
-    
-    public static JFrame botoesEscolhas;
-    
-    public static JFrame cadastroConteudo;
-    
-    public static JFrame tabelaConteudo;
+public class Temporarios {
+    public static Object TempObject;
 }
-

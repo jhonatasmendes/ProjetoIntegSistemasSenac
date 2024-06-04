@@ -4,6 +4,9 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.dao.daoConteudo;
+import com.mycompany.utilidades.BancoDeDadosMySql;
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import javax.swing.JOptionPane;
 
@@ -16,26 +19,37 @@ public class menu extends javax.swing.JFrame {
     /**
      * Creates new form menu
      */
-    public menu(String mode) {
+//    public menu(String mode) {
+//        initComponents();
+//        setLocationRelativeTo(null);
+//        setExtendedState(MAXIMIZED_BOTH);
+//        jtfLoginPermission.setText(mode);
+//        permissoesMode();
+//    }
+    
+    public menu() {
         initComponents();
+        BancoDeDadosMySql.conectar();
         setLocationRelativeTo(null);
         setExtendedState(MAXIMIZED_BOTH);
-        jtfLoginPermission.setText(mode);
+        jtfLoginPermission.setText(Constantes.LOGIN_TYPE);
         permissoesMode();
+        
+        
     }
 
-    private menu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+//    private menu() {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    }
     
     private void permissoesMode(){
-        if(jtfLoginPermission.getText() == "CLIENTE"){
+        if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_CLIENTE)){
             jmenuConteudo.setEnabled(true);
             jMenuVendedor.setEnabled(false);
             jMenuCliente.setEnabled(false);
             jMenuItemConteudo.setText("Vizualizar conteúdos");
         }
-        else if(jtfLoginPermission.getText() == "VENDEDOR"){
+        else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
             jmenuConteudo.setEnabled(true);
             jMenuVendedor.setEnabled(false);
             jMenuCliente.setEnabled(true);
@@ -192,7 +206,7 @@ public class menu extends javax.swing.JFrame {
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
         Formularios.menu.dispose();
-        
+;
         if(Formularios.login == null)
             Formularios.login = new login();
         
@@ -200,31 +214,31 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu5MouseClicked
 
     private void jMenuItemConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemConteudoMouseClicked
-        if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos", "CLIENTE");
+        if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
-        else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos","VENDEDOR");
+        else if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemConteudoMouseClicked
 
     private void jMenuItemConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConteudoActionPerformed
-        if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos", "CLIENTE");
+        if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
-        else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos","VENDEDOR");
+        else if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Conteúdos");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemConteudoActionPerformed
@@ -238,61 +252,61 @@ public class menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MouseClicked
 
     private void jMenuItemVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemVendedorMouseClicked
-        if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores", "CLIENTE");
+        if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
-        else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores","VENDEDOR");
+        else if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemVendedorMouseClicked
 
     private void jMenuItemClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItemClienteMouseClicked
-        if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes", "CLIENTE");
+        if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
-        else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes","VENDEDOR");
+        else if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemClienteMouseClicked
 
     private void jMenuItemVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemVendedorActionPerformed
-        if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores", "CLIENTE");
+        if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
-        else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores","VENDEDOR");
+        else if(Formularios.botoesEscolhas == null){
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Vendedores");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemVendedorActionPerformed
 
     private void jMenuItemClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemClienteActionPerformed
         if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "CLIENTE"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes", "CLIENTE");
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else if(Formularios.botoesEscolhas == null && jtfLoginPermission.getText() == "VENDEDOR"){
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes","VENDEDOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
         else{
-            Formularios.botoesEscolhas = new botoesEscolhas("Clientes","ADMINISTRADOR");
+            Formularios.botoesEscolhas = new botoesEscolhas("Clientes");
             Formularios.botoesEscolhas.setVisible(true);
         }
     }//GEN-LAST:event_jMenuItemClienteActionPerformed

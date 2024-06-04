@@ -4,6 +4,7 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 
 /**
@@ -14,67 +15,66 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
     /**
      * Creates new form botoesEscolhas
+     * @param titleMode
      */
-    public botoesEscolhas(String titleMode, String nivelAcesso) {
+    public botoesEscolhas(String titleMode) {
         initComponents();
         setResizable(false);
-        jLabelNameAcess.setText(nivelAcesso);
         jLabelTitle.setText(titleMode);
+        jLabelNameAcess.setText(Constantes.LOGIN_TYPE);
         titleAndPermsConteudo();
         setLocationRelativeTo(null);
     }
 
-    private botoesEscolhas() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+
     
     private void titleAndPermsConteudo(){
         if(jLabelTitle.getText() == "Conteúdos"){
-            if(jLabelNameAcess.getText() == "CLIENTE"){
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_CLIENTE)){
             jbtnVizualizar.setEnabled(true);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
             }
-            else if(jLabelNameAcess.getText() == "VENDEDOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(false);
             }
-            else if(jLabelNameAcess.getText() == "ADMINISTRADOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(true);
             }
         }
         else if(jLabelTitle.getText() == "Vendedores"){
-            if(jLabelNameAcess.getText() == "CLIENTE"){
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_CLIENTE)){
             jbtnVizualizar.setEnabled(false);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
             }
-            else if(jLabelNameAcess.getText() == "VENDEDOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(false);
                 jbtnInserir.setEnabled(false);
                 jbtnEditDelete.setEnabled(false);
             }
-            else if(jLabelNameAcess.getText() == "ADMINISTRADOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(true);
             }
         }
         else if(jLabelTitle.getText() == "Clientes"){
-            if(jLabelNameAcess.getText() == "CLIENTE"){
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_CLIENTE)){
             jbtnVizualizar.setEnabled(false);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
             }
-            else if(jLabelNameAcess.getText() == "VENDEDOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(true);
             }
-            else if(jLabelNameAcess.getText() == "ADMINISTRADOR"){
+            else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(true);
@@ -123,6 +123,16 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
         jbtnVizualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtnVizualizar.setText("Vizualizar");
+        jbtnVizualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jbtnVizualizarMouseClicked(evt);
+            }
+        });
+        jbtnVizualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnVizualizarActionPerformed(evt);
+            }
+        });
 
         jbtnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jbtnVoltar.setText("Voltar");
@@ -234,9 +244,21 @@ public class botoesEscolhas extends javax.swing.JFrame {
             Formularios.cadastroConteudo.setVisible(true);
     }//GEN-LAST:event_jbtnInserirMouseClicked
 
+    private void jbtnVizualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVizualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnVizualizarActionPerformed
+
+    private void jbtnVizualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnVizualizarMouseClicked
+         if(Formularios.tabelaConteudo == null)
+            Formularios.tabelaConteudo = new tabelaConteudo();
+
+            Formularios.tabelaConteudo.setVisible(true);
+    }//GEN-LAST:event_jbtnVizualizarMouseClicked
+
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -264,7 +286,7 @@ public class botoesEscolhas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new botoesEscolhas().setVisible(true);
+             //   new botoesEscolhas().setVisible(true);
             }
         });
     }

@@ -149,6 +149,11 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
         jbtnEditDelete.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jbtnEditDelete.setText("Editar ou Excluir");
+        jbtnEditDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditDeleteActionPerformed(evt);
+            }
+        });
 
         jLabelNameAcess.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabelNameAcess.setText("dasdsadsadsad");
@@ -254,6 +259,13 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
             Formularios.tabelaConteudo.setVisible(true);
     }//GEN-LAST:event_jbtnVizualizarMouseClicked
+
+    private void jbtnEditDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditDeleteActionPerformed
+        if(Formularios.tabelaConteudoEditRemove == null)
+            Formularios.tabelaConteudoEditRemove = new tabelaConteudoEditRemove();
+        
+        Formularios.tabelaConteudoEditRemove.setVisible(true);
+    }//GEN-LAST:event_jbtnEditDeleteActionPerformed
 
     /**
      * @param args the command line arguments

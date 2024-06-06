@@ -61,7 +61,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'Canal'),(2,'Filme'),(3,'Série'),(4,'Jogo');
+INSERT INTO `categoria` VALUES (1,'Canais'),(2,'Filmes'),(3,'Jogos'),(4,'Séries/Novelas');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,7 +108,7 @@ CREATE TABLE `conteudos` (
   KEY `conteudos_genero_FK` (`id_genero`),
   CONSTRAINT `conteudos_categoria_FK` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`),
   CONSTRAINT `conteudos_genero_FK` FOREIGN KEY (`id_genero`) REFERENCES `genero` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,7 +117,7 @@ CREATE TABLE `conteudos` (
 
 LOCK TABLES `conteudos` WRITE;
 /*!40000 ALTER TABLE `conteudos` DISABLE KEYS */;
-INSERT INTO `conteudos` VALUES (1,'godizila',2,1),(2,'globo',1,2),(3,'gta5',4,3),(4,'roud6',3,4),(5,'NBA',1,4),(6,'teste',2,2);
+INSERT INTO `conteudos` VALUES (1,'godizila',2,1),(2,'globo',1,2),(3,'gta5',4,3),(4,'roud6',3,4),(5,'NBA',1,4),(6,'teste',2,2),(7,'teste',4,2),(8,'tesate',4,4),(9,'fasdasd',4,1),(10,'a',2,1);
 /*!40000 ALTER TABLE `conteudos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -208,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-06 14:49:01
+-- Dump completed on 2024-06-06 17:18:36

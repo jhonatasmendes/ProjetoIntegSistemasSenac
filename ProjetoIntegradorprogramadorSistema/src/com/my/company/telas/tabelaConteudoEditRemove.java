@@ -5,7 +5,9 @@
 package com.my.company.telas;
 
 import com.mycompany.dao.daoConteudo;
+import com.mycompany.modelo.modeloConteudo;
 import com.mycompany.utilidades.Formularios;
+import com.mycompany.utilidades.Temporarios;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -14,12 +16,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author liberalino.1980
  */
-public class tabelaConteudo extends javax.swing.JFrame {
+public class tabelaConteudoEditRemove extends javax.swing.JFrame {
 
     /**
      * Creates new form tabelaConteudo
      */
-    public tabelaConteudo() {
+    public tabelaConteudoEditRemove() {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
@@ -167,6 +169,8 @@ public class tabelaConteudo extends javax.swing.JFrame {
         jbtnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableConteudo = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -224,6 +228,11 @@ public class tabelaConteudo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableConteudo);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Para editar ou remover algum conteúdo: ");
+
+        jLabel3.setText("Clique duas vezes sobre o mesmo.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -235,17 +244,27 @@ public class tabelaConteudo extends javax.swing.JFrame {
                 .addComponent(jtfFiltro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbtnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnFiltrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -277,7 +296,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfFiltroActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
-        Formularios.tabelaConteudo = null;
+        Formularios.tabelaConteudoEditRemove = null;
     }//GEN-LAST:event_formWindowClosed
 
     private void jcbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFiltroItemStateChanged
@@ -309,15 +328,68 @@ public class tabelaConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
     private void jTableConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConteudoMouseClicked
-        if(evt.getClickCount() == 2){
-            if(Formularios.editModeConteudo == null){
-                Formularios.editModeConteudo = new editModeConteudo();
-                
-                Formularios.editModeConteudo.setVisible(true);
-            }
+        if (evt.getClickCount() == 2){
+            modeloConteudo modCont = new modeloConteudo();
+            
+            modCont.setId(Integer.parseInt(String.valueOf(jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 0))));
+            modCont.setNome(String.valueOf(jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 1)));
+            
+            modCont.setId_categoria(Integer.parseInt(identificarCategoriaIndex()));
+            modCont.setId_genero(Integer.parseInt(identificarGeneroIndex()));
+
+            
+            Temporarios.TempObject = (modeloConteudo) modCont;
+            
+            cadastroConteudo cadastrousuario = new cadastroConteudo();
+            cadastrousuario.setVisible(true);
         }
     }//GEN-LAST:event_jTableConteudoMouseClicked
 
+    private String identificarCategoriaIndex(){
+        String categoriaSelected = String.valueOf((String) jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 2));
+        String generoSelected = String.valueOf((String) jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 3));
+        String setIndex = "0";
+        
+        if("Canais".equals(categoriaSelected)){
+            return "1";
+        }
+        else if("Filmes".equals(categoriaSelected)){
+            return "2";
+        }
+        else if("Jogos".equals(categoriaSelected)){
+            return "3";
+        }
+        else if("Series/Novelas".equals(categoriaSelected)){
+            return "4";
+        }
+        return setIndex;
+    }
+    
+    private String identificarGeneroIndex(){
+        String categoriaSelected = String.valueOf((String) jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 2));
+        String generoSelected = String.valueOf((String) jTableConteudo.getValueAt(jTableConteudo.getSelectedRow(), 3));
+        String setIndex = "0";
+        
+        if("Adulto".equals(generoSelected)){
+            return "1";
+        }
+        else if("Ação".equals(generoSelected)){
+            return "2";
+        }
+        else if("Comédia".equals(generoSelected)){
+            return "3";
+        }
+        else if("Esporte".equals(generoSelected)){
+            return "4";
+        }
+        else if("Infantil".equals(generoSelected)){
+            return "5";
+        }
+        else if("Terror".equals(generoSelected)){
+            return "6";
+        }
+        return setIndex;
+    }
     /**
      * @param args the command line arguments
      */
@@ -335,25 +407,28 @@ public class tabelaConteudo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(tabelaConteudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabelaConteudoEditRemove.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(tabelaConteudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabelaConteudoEditRemove.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(tabelaConteudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabelaConteudoEditRemove.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(tabelaConteudo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(tabelaConteudoEditRemove.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new tabelaConteudo().setVisible(true);
+                new tabelaConteudoEditRemove().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableConteudo;

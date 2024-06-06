@@ -34,7 +34,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
             if(id >= 0)
                 jtfIdConteudo.setText(String.valueOf(id));
                 
-                jbtSalvarOrAdd.setText("Salvar");
+                jbtSalvarOrAdd.setText("Adicionar");
                 jbtnDelete.setVisible(false);
         }
             else{
@@ -82,6 +82,34 @@ public class cadastroConteudo extends javax.swing.JFrame {
             jtfNomeConteudo.setText("");
             JOptionPane.showMessageDialog(null, "Erro ao tentar inserir conteúdo");
         }
+    }
+    
+    private void alterarConteudo(){
+        daoConteudo daoCont = new daoConteudo();
+        
+        if(daoCont.inserir(Integer.parseInt(jtfIdConteudo.getText()), String.valueOf(jtfNomeConteudo.getText()), jcbCategoria.getSelectedIndex(), jcbGenero.getSelectedIndex())){
+        JOptionPane.showMessageDialog(null, "Conte´ddo Alterado Com Sucesso");
+        
+        jtfIdConteudo.setText(String.valueOf(daoCont.ProximoIdConteudo()));
+        jtfNomeConteudo.setText("");
+        jcbCategoria.setSelectedIndex(0);
+        jcbGenero.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(null, "Não Foi possivel Alterar o Conteúdo");
+        }
+    }
+    
+      private void deletarConteudo(){
+        daoConteudo daoCont = new daoConteudo();
+        
+        if (daoCont.excluir(Integer.parseInt(jtfIdConteudo.getText()))){
+        JOptionPane.showMessageDialog(null, "Conteúdo Excluido Com Sucesso");
+        }else{
+            JOptionPane.showMessageDialog(null, "Não Foi possivel Excluir o Conteúdo");
+        }
+        
+        dispose();
+
     }
     
     /**
@@ -276,7 +304,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtSalvarOrAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalvarOrAddActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jbtSalvarOrAddActionPerformed
 
     private void jtfNomeConteudoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeConteudoActionPerformed
@@ -288,7 +316,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
-        // TODO add your handling code here:
+        deletarConteudo();       
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed
@@ -316,7 +344,12 @@ public class cadastroConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfIdConteudoActionPerformed
 
     private void jbtSalvarOrAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtSalvarOrAddMouseClicked
-        addConteudo();
+        if(jbtSalvarOrAdd.getText().equals("Adcionar")){
+            addConteudo();
+        }
+        else{
+            alterarConteudo();
+        }
     }//GEN-LAST:event_jbtSalvarOrAddMouseClicked
 
     /**

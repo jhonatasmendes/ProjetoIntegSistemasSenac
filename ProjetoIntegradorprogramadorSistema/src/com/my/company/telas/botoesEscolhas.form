@@ -140,6 +140,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Editar ou Excluir"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEditDeleteActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelNameAcess">
           <Properties>

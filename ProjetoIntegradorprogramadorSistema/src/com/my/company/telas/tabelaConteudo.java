@@ -7,6 +7,7 @@ package com.my.company.telas;
 import com.mycompany.dao.daoConteudo;
 import com.mycompany.utilidades.Formularios;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,9 +23,15 @@ public class tabelaConteudo extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
+        listarConteudo();
+        
+        if(jcbFiltro.getSelectedIndex() == 0){
+            jtfFiltro.setEnabled(false);
+            jbtnFiltrar.setEnabled(false);
+        }
     }
     
-    public void listarUsuarios(){
+    public void listarConteudo(){
         try{
             DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableConteudo.getModel();
             
@@ -39,9 +46,10 @@ public class tabelaConteudo extends javax.swing.JFrame {
             while(resultSet.next()){
                 String id = resultSet.getString(1);
                 String nome = resultSet.getString(2);
-                String sobrenome = resultSet.getString(3);
+                String categoria = resultSet.getString(3);
+                String genero = resultSet.getString(4);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome,});
+                defaulttablemodel.addRow(new Object[]{id, nome, categoria, genero});
             }  
         }
         catch(Exception e){
@@ -49,7 +57,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
         }
     }
     
-    public void listarUsuarioId(int conteudoId){
+    public void listarConteudoId(int conteudoId){
         try{
             DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
             
@@ -63,16 +71,17 @@ public class tabelaConteudo extends javax.swing.JFrame {
             while(resultset.next()){
                 String id = resultset.getString(1);
                 String nome = resultset.getString(2);
-                String sobrenome = resultset.getString(3);
+                String id_categoria = resultset.getString(3);
+                String id_genero = resultset.getString(4);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+                defaulttablemodel.addRow(new Object[]{id, nome, id_categoria, id_genero});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
     
-    public void listarUsuarioNome(String conteudoNome){
+    public void listarConteudoNome(String conteudoNome){
         try{
             DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
             
@@ -86,16 +95,17 @@ public class tabelaConteudo extends javax.swing.JFrame {
             while(resultset.next()){
                 String id = resultset.getString(1);
                 String nome = resultset.getString(2);
-                String sobrenome = resultset.getString(3);
+                String id_categoria = resultset.getString(3);
+                String id_genero = resultset.getString(4);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+                defaulttablemodel.addRow(new Object[]{id, nome, id_categoria, id_genero});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
     
-        public void listarUsuarioSobrenome(String categoriaNome){
+        public void listarCategoriaNome(String categoriaNome){
         try{
             DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
             
@@ -109,15 +119,39 @@ public class tabelaConteudo extends javax.swing.JFrame {
             while(resultset.next()){
                 String id = resultset.getString(1);
                 String nome = resultset.getString(2);
-                String sobrenome = resultset.getString(3);
+                String id_categoria = resultset.getString(3);
+                String id_genero = resultset.getString(4);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, sobrenome});
+                defaulttablemodel.addRow(new Object[]{id, nome, id_categoria, id_genero});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
+        public void listarGeneroNome(String generoNome){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            
+            jTableConteudo.setModel(defaulttablemodel);
+            
+            daoConteudo daoCont = new daoConteudo();
+            
+            ResultSet resultset = daoCont.SelecionarPorGenero(generoNome);
+            
+            defaulttablemodel.setRowCount(0);
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                 String id_categoria = resultset.getString(3);
+                String id_genero = resultset.getString(4);
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, id_categoria, id_genero});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,10 +162,9 @@ public class tabelaConteudo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jcbFiltro = new javax.swing.JComboBox<>();
+        jtfFiltro = new javax.swing.JTextField();
+        jbtnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableConteudo = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -144,22 +177,30 @@ public class tabelaConteudo extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Canais", "Filmes", "Series", "Jogos" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "NOME", "CATEGORIA", "GENERO" }));
+        jcbFiltro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbFiltroItemStateChanged(evt);
+            }
+        });
+        jcbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcbFiltroActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Categoria");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jtfFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jtfFiltroActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Filtrar");
+        jbtnFiltrar.setText("Filtrar");
+        jbtnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnFiltrarActionPerformed(evt);
+            }
+        });
 
         jTableConteudo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jTableConteudo.setModel(new javax.swing.table.DefaultTableModel(
@@ -167,15 +208,20 @@ public class tabelaConteudo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome", "Categoria"
+                "ID", "NOME", "CATEGORIA", "GENERO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        jTableConteudo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableConteudoMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(jTableConteudo);
@@ -189,17 +235,15 @@ public class tabelaConteudo extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
+                .addComponent(jtfFiltro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jbtnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -210,14 +254,13 @@ public class tabelaConteudo extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(jcbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
         );
@@ -242,17 +285,51 @@ public class tabelaConteudo extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcbFiltroActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jtfFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_jtfFiltroActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.tabelaConteudo = null;
     }//GEN-LAST:event_formWindowClosed
+
+    private void jcbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFiltroItemStateChanged
+        if(jcbFiltro.getSelectedIndex() != 0){
+            jtfFiltro.setEnabled(true);
+            jbtnFiltrar.setEnabled(true);
+            jtfFiltro.setText("");
+        }
+        else{
+            jtfFiltro.setEnabled(false);
+            jbtnFiltrar.setEnabled(false);
+            jtfFiltro.setText("");
+        }
+    }//GEN-LAST:event_jcbFiltroItemStateChanged
+
+    private void jbtnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFiltrarActionPerformed
+        if(jcbFiltro.getSelectedIndex() == 1){
+            listarConteudoId(Integer.parseInt(jtfFiltro.getText()));
+        }
+        else if(jcbFiltro.getSelectedIndex() == 2){
+            listarConteudoNome(jtfFiltro.getText());
+    }
+        else if(jcbFiltro.getSelectedIndex() == 3){
+            listarCategoriaNome(jtfFiltro.getText());
+    }
+        else if(jcbFiltro.getSelectedIndex() == 4){
+            listarGeneroNome(jtfFiltro.getText());
+    }
+    }//GEN-LAST:event_jbtnFiltrarActionPerformed
+
+    private void jTableConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConteudoMouseClicked
+        if(evt.getClickCount() == 2){
+            JOptionPane.showMessageDialog(null, "Para editar ou remover algum conteúdo, acesse a tabela de edição");
+        }
+    }//GEN-LAST:event_jTableConteudoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -290,14 +367,13 @@ public class tabelaConteudo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableConteudo;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jbtnFiltrar;
+    private javax.swing.JComboBox<String> jcbFiltro;
+    private javax.swing.JTextField jtfFiltro;
     // End of variables declaration//GEN-END:variables
 }

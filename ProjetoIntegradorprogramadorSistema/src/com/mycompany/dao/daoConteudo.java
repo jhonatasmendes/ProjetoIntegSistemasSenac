@@ -80,7 +80,8 @@ public class daoConteudo extends BancoDeDadosMySql{
                  join categoria ca
                  	on co.id_categoria = ca.id 
                  join genero g
-                 	on co.id_genero = g.id 
+                 	on co.id_genero = g.id
+                 order by co.id
                  """;
             
             setStatement(getConexao().prepareStatement(sql));

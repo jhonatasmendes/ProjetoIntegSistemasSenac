@@ -10,4 +10,5 @@ package com.mycompany.utilidades;
  */
 public class Temporarios {
     public static Object TempObject;
+    public static Object TempObject2;
 }

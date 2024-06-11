@@ -243,10 +243,18 @@ public class botoesEscolhas extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnVoltarMouseClicked
 
     private void jbtnInserirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnInserirMouseClicked
-        if(Formularios.cadastroConteudo == null)
+        if(jLabelTitle.getText() == "Conteúdos"){
+            if(Formularios.cadastroConteudo == null)
             Formularios.cadastroConteudo = new cadastroConteudo();
 
             Formularios.cadastroConteudo.setVisible(true);
+        }
+        else if(jLabelTitle.getText() == "Vendedores"){
+            if(Formularios.cadastroVendedor == null)
+            Formularios.cadastroVendedor = new cadastroVendedor();
+
+            Formularios.cadastroVendedor.setVisible(true);
+        }
     }//GEN-LAST:event_jbtnInserirMouseClicked
 
     private void jbtnVizualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVizualizarActionPerformed
@@ -254,17 +262,33 @@ public class botoesEscolhas extends javax.swing.JFrame {
     }//GEN-LAST:event_jbtnVizualizarActionPerformed
 
     private void jbtnVizualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnVizualizarMouseClicked
-         if(Formularios.tabelaConteudo == null)
-            Formularios.tabelaConteudo = new tabelaConteudo();
+        if(jLabelTitle.getText() == "Conteúdos"){
+            if(Formularios.tabelaConteudo == null)
+                Formularios.tabelaConteudo = new tabelaConteudo();
 
             Formularios.tabelaConteudo.setVisible(true);
+         }
+        else if(jLabelTitle.getText() == "Vendedores"){
+            if(Formularios.tabelaVendedor == null)
+                Formularios.tabelaVendedor = new tabelaVendedor();
+
+            Formularios.tabelaVendedor.setVisible(true);
+         }
     }//GEN-LAST:event_jbtnVizualizarMouseClicked
 
     private void jbtnEditDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditDeleteActionPerformed
-        if(Formularios.tabelaConteudoEditRemove == null)
-            Formularios.tabelaConteudoEditRemove = new tabelaConteudoEditRemove();
-        
-        Formularios.tabelaConteudoEditRemove.setVisible(true);
+        if(jLabelTitle.getText() == "Conteúdos"){
+            if(Formularios.tabelaVendedorEditRemove == null)
+                Formularios.tabelaVendedorEditRemove = new tabelaVendedorEditRemove();
+
+            Formularios.tabelaVendedorEditRemove.setVisible(true);
+        }
+        else if(jLabelTitle.getText() == "Vendedores"){
+            if(Formularios.tabelaVendedorEditRemove == null)
+                Formularios.tabelaVendedorEditRemove = new tabelaVendedorEditRemove();
+
+            Formularios.tabelaVendedorEditRemove.setVisible(true);
+        }
     }//GEN-LAST:event_jbtnEditDeleteActionPerformed
 
     /**

@@ -309,6 +309,7 @@ public class tabelaConteudoEditRemove extends javax.swing.JFrame {
             jtfFiltro.setEnabled(false);
             jbtnFiltrar.setEnabled(false);
             jtfFiltro.setText("");
+            listarConteudo();
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
 

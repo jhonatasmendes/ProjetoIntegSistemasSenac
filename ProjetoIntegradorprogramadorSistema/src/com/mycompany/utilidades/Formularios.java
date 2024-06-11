@@ -24,5 +24,13 @@ public class Formularios {
     public static JFrame tabelaConteudoEditRemove;
     
     public static JFrame editModeConteudo;
+    
+    
+    
+    public static JFrame cadastroVendedor;
+    
+    public static JFrame tabelaVendedor;
+    
+    public static JFrame tabelaVendedorEditRemove;
 }
 

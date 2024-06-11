@@ -27,7 +27,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
         
         if(jcbFiltro.getSelectedIndex() == 0){
             jtfFiltro.setEnabled(false);
-            jbtnFiltrar.setEnabled(false);
+
         }
     }
     
@@ -187,9 +187,21 @@ public class tabelaConteudo extends javax.swing.JFrame {
             }
         });
 
+        jtfFiltro.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jtfFiltroInputMethodTextChanged(evt);
+            }
+        });
         jtfFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtfFiltroActionPerformed(evt);
+            }
+        });
+        jtfFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfFiltroKeyTyped(evt);
             }
         });
 
@@ -273,7 +285,7 @@ public class tabelaConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbFiltroActionPerformed
 
     private void jtfFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfFiltroActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jtfFiltroActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
@@ -283,30 +295,14 @@ public class tabelaConteudo extends javax.swing.JFrame {
     private void jcbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFiltroItemStateChanged
         if(jcbFiltro.getSelectedIndex() != 0){
             jtfFiltro.setEnabled(true);
-            jbtnFiltrar.setEnabled(true);
             jtfFiltro.setText("");
         }
         else{
             jtfFiltro.setEnabled(false);
-            jbtnFiltrar.setEnabled(false);
             jtfFiltro.setText("");
+            listarConteudo();
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
-
-    private void jbtnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFiltrarActionPerformed
-        if(jcbFiltro.getSelectedIndex() == 1){
-            listarConteudoId(Integer.parseInt(jtfFiltro.getText()));
-        }
-        else if(jcbFiltro.getSelectedIndex() == 2){
-            listarConteudoNome(jtfFiltro.getText());
-    }
-        else if(jcbFiltro.getSelectedIndex() == 3){
-            listarCategoriaNome(jtfFiltro.getText());
-    }
-        else if(jcbFiltro.getSelectedIndex() == 4){
-            listarGeneroNome(jtfFiltro.getText());
-    }
-    }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
     private void jTableConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConteudoMouseClicked
         if(evt.getClickCount() == 2){
@@ -317,6 +313,28 @@ public class tabelaConteudo extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jTableConteudoMouseClicked
+
+    private void jtfFiltroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtfFiltroInputMethodTextChanged
+    }//GEN-LAST:event_jtfFiltroInputMethodTextChanged
+
+    private void jtfFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfFiltroKeyTyped
+         
+    }//GEN-LAST:event_jtfFiltroKeyTyped
+
+    private void jbtnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFiltrarActionPerformed
+        if(jcbFiltro.getSelectedIndex() == 1){
+            listarConteudoId(Integer.parseInt(jtfFiltro.getText()));
+        }
+        else if(jcbFiltro.getSelectedIndex() == 2){
+            listarConteudoNome(jtfFiltro.getText());
+        }
+        else if(jcbFiltro.getSelectedIndex() == 3){
+            listarCategoriaNome(jtfFiltro.getText());
+        }
+        else if(jcbFiltro.getSelectedIndex() == 4){
+            listarGeneroNome(jtfFiltro.getText());
+        }
+    }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
     /**
      * @param args the command line arguments

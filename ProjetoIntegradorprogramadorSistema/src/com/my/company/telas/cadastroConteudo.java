@@ -87,8 +87,8 @@ public class cadastroConteudo extends javax.swing.JFrame {
     private void alterarConteudo(){
         daoConteudo daoCont = new daoConteudo();
         
-        if(daoCont.inserir(Integer.parseInt(jtfIdConteudo.getText()), String.valueOf(jtfNomeConteudo.getText()), jcbCategoria.getSelectedIndex(), jcbGenero.getSelectedIndex())){
-        JOptionPane.showMessageDialog(null, "Conte´ddo Alterado Com Sucesso");
+        if(daoCont.alterar(Integer.parseInt(jtfIdConteudo.getText()), String.valueOf(jtfNomeConteudo.getText()), jcbCategoria.getSelectedIndex(), jcbGenero.getSelectedIndex())){
+        JOptionPane.showMessageDialog(null, "Conteúdo " + " '" +jtfNomeConteudo.getText() + "' " + " Alterado Com Sucesso");
         
         jtfIdConteudo.setText(String.valueOf(daoCont.ProximoIdConteudo()));
         jtfNomeConteudo.setText("");
@@ -97,16 +97,21 @@ public class cadastroConteudo extends javax.swing.JFrame {
         }else{
             JOptionPane.showMessageDialog(null, "Não Foi possivel Alterar o Conteúdo");
         }
+        
+        ((tabelaConteudoEditRemove) Formularios.tabelaConteudoEditRemove).listarConteudo();
+        dispose();
     }
     
       private void deletarConteudo(){
         daoConteudo daoCont = new daoConteudo();
         
         if (daoCont.excluir(Integer.parseInt(jtfIdConteudo.getText()))){
-        JOptionPane.showMessageDialog(null, "Conteúdo Excluido Com Sucesso");
+        JOptionPane.showMessageDialog(null, "Conteúdo: " + " '" +jtfNomeConteudo.getText() + "', " + " Excluído Com Sucesso");
         }else{
             JOptionPane.showMessageDialog(null, "Não Foi possivel Excluir o Conteúdo");
         }
+        
+        ((tabelaConteudoEditRemove) Formularios.tabelaConteudoEditRemove).listarConteudo();
         
         dispose();
 
@@ -316,7 +321,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
-        deletarConteudo();       
+       deletarConteudo();
     }//GEN-LAST:event_jbtnDeleteActionPerformed
 
     private void jcbCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbCategoriaActionPerformed

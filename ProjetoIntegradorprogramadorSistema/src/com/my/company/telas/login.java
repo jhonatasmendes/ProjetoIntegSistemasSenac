@@ -9,6 +9,7 @@ import com.mycompany.dao.daoLoginVerificacao;
 import com.mycompany.utilidades.BancoDeDadosMySql;
 import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -217,7 +218,13 @@ public class login extends javax.swing.JFrame {
             if(Formularios.menu == null)
             Formularios.menu = new menu();
             
-        Formularios.menu.setVisible(true);
+            Formularios.menu.setVisible(true);
+        
+            daoLoginVerificacao daoLogin = new daoLoginVerificacao();
+            
+            ResultSet resultset = daoLogin.idVendedorLogado(userNome, userSenha);
+
+            
         }
         else if (verificarLoginCliente(userNome, userSenha)) {
             JOptionPane.showMessageDialog(null, "Logado como cliente.");

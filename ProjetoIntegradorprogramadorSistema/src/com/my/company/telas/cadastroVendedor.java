@@ -75,7 +75,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
             jtfUsuarioVendedor.setText("");
             jtfSenhaVendedor.setText("");
             
-            JOptionPane.showMessageDialog(null, "Vendedor inserido com sucesso");
+            JOptionPane.showMessageDialog(null, "Vendedor cadastrado com sucesso");
         }
         else{
             jtfIdVendedor.setText(String.valueOf(daoVend.ProximoIdVendedor()));
@@ -84,7 +84,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
             jtfUsuarioVendedor.setText("");
             jtfSenhaVendedor.setText("");
             
-            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir um novo vendedor");
+            JOptionPane.showMessageDialog(null, "Erro ao tentar cadastrar um novo vendedor");
         }
     }
     
@@ -97,7 +97,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
             jtfUsuarioVendedor.setText("");
             jtfSenhaVendedor.setText("");
             
-            JOptionPane.showMessageDialog(null, "Vendedor inserido com sucesso");
+            JOptionPane.showMessageDialog(null, "Informações do vendedor alteradas com sucesso");
         }
         else{
             jtfIdVendedor.setText(String.valueOf(daoVend.ProximoIdVendedor()));
@@ -106,9 +106,10 @@ public class cadastroVendedor extends javax.swing.JFrame {
             jtfUsuarioVendedor.setText("");
             jtfSenhaVendedor.setText("");
             
-            JOptionPane.showMessageDialog(null, "Erro ao tentar inserir um novo vendedor");
+            JOptionPane.showMessageDialog(null, "Erro ao tentar alterar as informações do vendedor");
         }
         
+        dispose();
         ((tabelaVendedorEditRemove)Formularios.tabelaVendedorEditRemove).listarVendedor();
     }
     
@@ -118,7 +119,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
         if (daoVend.excluir(Integer.parseInt(jtfIdVendedor.getText()))){
         JOptionPane.showMessageDialog(null, "Vendedor: " + " '" + jtfNomeVendedor.getText() + "', " + " Excluído Com Sucesso");
         }else{
-            JOptionPane.showMessageDialog(null, "Não Foi possivel Excluir o Conteúdo");
+            JOptionPane.showMessageDialog(null, "Não Foi possivel Excluir o Vendedor Selecionado");
         }
         
         ((tabelaVendedorEditRemove) Formularios.tabelaVendedorEditRemove).listarVendedor();
@@ -154,7 +155,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
         jtfUsuarioVendedor = new javax.swing.JTextField();
         jbtSalvarOrAdd1 = new javax.swing.JButton();
         jbtnDelete1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jbtnCancelar1 = new javax.swing.JButton();
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("ID");
@@ -268,16 +269,16 @@ public class cadastroVendedor extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton3.setText("Cancelar");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbtnCancelar1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbtnCancelar1.setText("Cancelar");
+        jbtnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                jbtnCancelar1MouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jbtnCancelar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jbtnCancelar1ActionPerformed(evt);
             }
         });
 
@@ -302,7 +303,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jbtnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -332,7 +333,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
                 .addComponent(jtfSenhaVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnCancelar1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtSalvarOrAdd1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnDelete1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -414,8 +415,19 @@ public class cadastroVendedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jbtSalvarOrAdd1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtSalvarOrAdd1MouseClicked
-        if(jbtSalvarOrAdd1.getText().equals("Adcionar")){
-            addVendedor();
+        if(jbtSalvarOrAdd1.getText().equals("Cadastrar Vendedor")){
+            if("".equals(jtfNomeVendedor.getText())){
+                JOptionPane.showMessageDialog(null, "Insira um nome para o vendedor.");
+            }
+            else if("".equals(jtfUsuarioVendedor.getText())){
+                JOptionPane.showMessageDialog(null, "Insira um usuário de login para o vendedor.");
+            }
+            else if("".equals(jtfSenhaVendedor.getText())){
+                JOptionPane.showMessageDialog(null, "Insira uma senha de login para o vendedor.");
+            }
+            else{
+                addVendedor();
+            }
         }
         else{
             alterarVendedor();
@@ -430,13 +442,13 @@ public class cadastroVendedor extends javax.swing.JFrame {
         deletarVendedor();
     }//GEN-LAST:event_jbtnDelete1ActionPerformed
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void jbtnCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnCancelar1MouseClicked
         Formularios.cadastroConteudo.dispose();
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_jbtnCancelar1MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jbtnCancelar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelar1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbtnCancelar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -475,7 +487,6 @@ public class cadastroVendedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -486,6 +497,7 @@ public class cadastroVendedor extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JButton jbtSalvarOrAdd;
     private javax.swing.JButton jbtSalvarOrAdd1;
+    private javax.swing.JButton jbtnCancelar1;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnDelete1;
     private javax.swing.JTextField jtfIdConteudo1;

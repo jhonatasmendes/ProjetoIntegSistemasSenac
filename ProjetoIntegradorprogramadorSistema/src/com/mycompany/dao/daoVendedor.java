@@ -121,7 +121,7 @@ public class daoVendedor {
                 select v.id, v.nome, v.usuario, v.senha, count(c.id_vendedor) AS Qtt_Clientes
                 	from vendedor v
                 left join cliente c ON c.id_vendedor = v.id
-                	where v.nome like = ?
+                	where v.nome like ?
                 group by  v.id, v.nome, v.usuario, v.senha
                 """;
           

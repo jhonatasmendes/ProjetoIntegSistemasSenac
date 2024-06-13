@@ -29,7 +29,6 @@ public class tabelaConteudoEditRemove extends javax.swing.JFrame {
         
         if(jcbFiltro.getSelectedIndex() == 0){
             jtfFiltro.setEnabled(false);
-            jbtnFiltrar.setEnabled(false);
         }
     }
     
@@ -302,12 +301,10 @@ public class tabelaConteudoEditRemove extends javax.swing.JFrame {
     private void jcbFiltroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFiltroItemStateChanged
         if(jcbFiltro.getSelectedIndex() != 0){
             jtfFiltro.setEnabled(true);
-            jbtnFiltrar.setEnabled(true);
             jtfFiltro.setText("");
         }
         else{
             jtfFiltro.setEnabled(false);
-            jbtnFiltrar.setEnabled(false);
             jtfFiltro.setText("");
             listarConteudo();
         }
@@ -319,13 +316,13 @@ public class tabelaConteudoEditRemove extends javax.swing.JFrame {
         }
         else if(jcbFiltro.getSelectedIndex() == 2){
             listarConteudoNome(jtfFiltro.getText());
-    }
-        else if(jcbFiltro.getSelectedIndex() == 3){
-            listarCategoriaNome(jtfFiltro.getText());
-    }
-        else if(jcbFiltro.getSelectedIndex() == 4){
-            listarGeneroNome(jtfFiltro.getText());
-    }
+        }
+            else if(jcbFiltro.getSelectedIndex() == 3){
+                listarCategoriaNome(jtfFiltro.getText());
+        }
+            else if(jcbFiltro.getSelectedIndex() == 4){
+                listarGeneroNome(jtfFiltro.getText());
+        }
     }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
     private void jTableConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConteudoMouseClicked

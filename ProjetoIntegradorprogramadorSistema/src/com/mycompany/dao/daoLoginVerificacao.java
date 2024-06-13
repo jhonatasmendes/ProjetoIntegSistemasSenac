@@ -27,20 +27,16 @@ public class daoLoginVerificacao extends BancoDeDadosMySql{
         try (Connection conn = BancoDeDadosMySql.obterConexao(); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
              
-            // Configura os parâmetros do PreparedStatement
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
             
-            // Executa a consulta e obtém o ResultSet
             try (ResultSet rs = stmt.executeQuery()) {
-                // Se houver pelo menos um registro, o login é válido
                 if (rs.next()) {
                     verificacaoLogin = true;
                 }
             }
             
         } catch (SQLException e) {
-            // Imprime a mensagem de erro para depuração
             System.out.println(e.getMessage());
         }
 
@@ -58,20 +54,18 @@ public class daoLoginVerificacao extends BancoDeDadosMySql{
         try (Connection conn = BancoDeDadosMySql.obterConexao(); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
              
-            // Configura os parâmetros do PreparedStatement
+
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
             
-            // Executa a consulta e obtém o ResultSet
+
             try (ResultSet rs = stmt.executeQuery()) {
-                // Se houver pelo menos um registro, o login é válido
                 if (rs.next()) {
                     verificacaoLogin = true;
                 }
             }
             
         } catch (SQLException e) {
-            // Imprime a mensagem de erro para depuração
             System.out.println(e.getMessage());
         }
 
@@ -89,23 +83,41 @@ public class daoLoginVerificacao extends BancoDeDadosMySql{
         try (Connection conn = BancoDeDadosMySql.obterConexao(); 
              PreparedStatement stmt = conn.prepareStatement(sql)) {
              
-            // Configura os parâmetros do PreparedStatement
             stmt.setString(1, usuario);
             stmt.setString(2, senha);
             
-            // Executa a consulta e obtém o ResultSet
             try (ResultSet rs = stmt.executeQuery()) {
-                // Se houver pelo menos um registro, o login é válido
                 if (rs.next()) {
                     verificacaoLogin = true;
                 }
             }
             
         } catch (SQLException e) {
-            // Imprime a mensagem de erro para depuração
             System.out.println(e.getMessage());
         }
 
         return verificacaoLogin;
+    }
+      
+      public ResultSet idVendedorLogado (String usuario, String senha){
+        try{
+            String sql = """
+                     select v.id from
+                     vendedor v
+                     where v.usuario = ? and v.senha = ?
+                     """;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(1, usuario);
+            getStatement().setString(2, senha);
+            
+            getStatement().executeQuery();
+            
+            setResultado(getStatement().executeQuery());
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return getResultado();
     }
 }

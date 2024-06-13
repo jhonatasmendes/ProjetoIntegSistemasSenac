@@ -34,9 +34,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
     
      public void listarVendedor(){
         try{
-            DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableConteudo.getModel();
+            DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableVendedor.getModel();
             
-            jTableConteudo.setModel(defaulttablemodel);
+            jTableVendedor.setModel(defaulttablemodel);
             
             daoVendedor daoVend = new daoVendedor();
             
@@ -49,8 +49,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
                 String nome = resultSet.getString(2);
                 String usuario = resultSet.getString(3);
                 String senha = resultSet.getString(4);
+                String totalCliente = resultSet.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha});
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
             }  
         }
         catch(Exception e){
@@ -60,9 +61,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
     
     public void listarVendedorId(int vendedorId){
         try{
-            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableVendedor.getModel();
             
-            jTableConteudo.setModel(defaulttablemodel);
+            jTableVendedor.setModel(defaulttablemodel);
             
             daoVendedor daoVend = new daoVendedor();
             
@@ -74,8 +75,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
                 String nome = resultset.getString(2);
                 String usuario = resultset.getString(3);
                 String senha = resultset.getString(4);
+                String totalCliente = resultset.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha});
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -84,9 +86,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
     
     public void listarVendedorNome(String vendedorNome){
         try{
-            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableConteudo.getModel();
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableVendedor.getModel();
             
-            jTableConteudo.setModel(defaulttablemodel);
+            jTableVendedor.setModel(defaulttablemodel);
             
             daoVendedor daoVend = new daoVendedor();
             
@@ -98,8 +100,9 @@ public class tabelaVendedor extends javax.swing.JFrame {
                 String nome = resultset.getString(2);
                 String usuario = resultset.getString(3);
                 String senha = resultset.getString(4);
+                String totalCliente = resultset.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha});
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -119,7 +122,7 @@ public class tabelaVendedor extends javax.swing.JFrame {
         jtfFiltro = new javax.swing.JTextField();
         jbtnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableConteudo = new javax.swing.JTable();
+        jTableVendedor = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -128,7 +131,7 @@ public class tabelaVendedor extends javax.swing.JFrame {
             }
         });
 
-        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "NOME", "CATEGORIA", "GENERO" }));
+        jcbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "ID", "NOME" }));
         jcbFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbFiltroItemStateChanged(evt);
@@ -165,29 +168,29 @@ public class tabelaVendedor extends javax.swing.JFrame {
             }
         });
 
-        jTableConteudo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTableConteudo.setModel(new javax.swing.table.DefaultTableModel(
+        jTableVendedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableVendedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "NOME", "CATEGORIA", "GENERO"
+                "ID", "NOME", "USUARIO", "SENHA", "TOTAL CLIENTES"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jTableConteudo.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableVendedor.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableConteudoMouseClicked(evt);
+                jTableVendedorMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableConteudo);
+        jScrollPane1.setViewportView(jTableVendedor);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -257,9 +260,15 @@ public class tabelaVendedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
 
-    private void jTableConteudoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableConteudoMouseClicked
-
-    }//GEN-LAST:event_jTableConteudoMouseClicked
+    private void jTableVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendedorMouseClicked
+        if(evt.getClickCount() == 2){
+            if(Formularios.editModeVendedor == null){
+                Formularios.editModeVendedor = new editModeVendedor();
+                
+                Formularios.editModeVendedor.setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_jTableVendedorMouseClicked
 
     private void jtfFiltroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtfFiltroInputMethodTextChanged
     }//GEN-LAST:event_jtfFiltroInputMethodTextChanged
@@ -316,7 +325,7 @@ public class tabelaVendedor extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableConteudo;
+    private javax.swing.JTable jTableVendedor;
     private javax.swing.JButton jbtnFiltrar;
     private javax.swing.JComboBox<String> jcbFiltro;
     private javax.swing.JTextField jtfFiltro;

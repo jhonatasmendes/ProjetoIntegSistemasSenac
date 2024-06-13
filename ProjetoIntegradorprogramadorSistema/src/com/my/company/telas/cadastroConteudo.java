@@ -134,7 +134,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
         jcbCategoria = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jbtSalvarOrAdd = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnCancelar = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jcbGenero = new javax.swing.JComboBox<>();
@@ -189,16 +189,16 @@ public class cadastroConteudo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jButton2.setText("Cancelar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        jbtnCancelar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jbtnCancelar.setText("Cancelar");
+        jbtnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                jbtnCancelarMouseClicked(evt);
             }
         });
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtnCancelarActionPerformed(evt);
             }
         });
 
@@ -246,7 +246,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jbtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -282,7 +282,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
                 .addComponent(jtfNomeConteudo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtSalvarOrAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
@@ -316,9 +316,9 @@ public class cadastroConteudo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNomeConteudoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_jbtnCancelarActionPerformed
 
     private void jbtnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteActionPerformed
        deletarConteudo();
@@ -336,9 +336,9 @@ public class cadastroConteudo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbGeneroActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void jbtnCancelarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtnCancelarMouseClicked
         Formularios.cadastroConteudo.dispose();
-    }//GEN-LAST:event_jButton2MouseClicked
+    }//GEN-LAST:event_jbtnCancelarMouseClicked
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.cadastroConteudo = null;
@@ -396,7 +396,6 @@ public class cadastroConteudo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -405,6 +404,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JButton jbtSalvarOrAdd;
+    private javax.swing.JButton jbtnCancelar;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JComboBox<String> jcbCategoria;
     private javax.swing.JComboBox<String> jcbGenero;

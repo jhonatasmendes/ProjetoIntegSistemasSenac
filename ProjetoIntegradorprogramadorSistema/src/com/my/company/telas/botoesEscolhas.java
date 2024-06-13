@@ -34,11 +34,19 @@ public class botoesEscolhas extends javax.swing.JFrame {
             jbtnVizualizar.setEnabled(true);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
+            
+            jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(false);
+                
+            jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
@@ -51,11 +59,20 @@ public class botoesEscolhas extends javax.swing.JFrame {
             jbtnVizualizar.setEnabled(false);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
+            
+            jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(false);
                 jbtnInserir.setEnabled(false);
                 jbtnEditDelete.setEnabled(false);
+                jbtnVendedores.setEnabled(false);
+                
+                jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
@@ -68,11 +85,19 @@ public class botoesEscolhas extends javax.swing.JFrame {
             jbtnVizualizar.setEnabled(false);
             jbtnInserir.setEnabled(false);
             jbtnEditDelete.setEnabled(false);
+            
+            jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_VENDEDOR)){
                 jbtnVizualizar.setEnabled(true);
                 jbtnInserir.setEnabled(true);
                 jbtnEditDelete.setEnabled(true);
+                
+                jbtnConteudos.setVisible(false);
+            jbtnVendedores.setVisible(false);
+            jbtnClientes.setVisible(false);
             }
             else if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
                 jbtnVizualizar.setEnabled(true);
@@ -99,6 +124,9 @@ public class botoesEscolhas extends javax.swing.JFrame {
         jLabelNameAcess = new javax.swing.JLabel();
         jLabelTitle = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jbtnVendedores = new javax.swing.JButton();
+        jbtnConteudos = new javax.swing.JButton();
+        jbtnClientes = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -164,32 +192,67 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
         jLabel10.setText("Acesso:");
 
+        jbtnVendedores.setText("Vendedores");
+        jbtnVendedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnVendedoresActionPerformed(evt);
+            }
+        });
+
+        jbtnConteudos.setText("Conteúdos");
+        jbtnConteudos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnConteudosActionPerformed(evt);
+            }
+        });
+
+        jbtnClientes.setText("Clientes");
+        jbtnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnClientesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelNameAcess, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jbtnEditDelete, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnVoltar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnInserir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnVizualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jbtnVizualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbtnInserir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jbtnEditDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(246, 246, 246)
-                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(240, 240, 240)
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jbtnConteudos)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnVendedores)
+                        .addGap(18, 18, 18)
+                        .addComponent(jbtnClientes)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabelNameAcess, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jbtnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnConteudos)
+                    .addComponent(jbtnVendedores)
+                    .addComponent(jbtnClientes))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jLabelTitle)
                 .addGap(31, 31, 31)
                 .addComponent(jbtnVizualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -197,7 +260,7 @@ public class botoesEscolhas extends javax.swing.JFrame {
                 .addComponent(jbtnInserir, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbtnEditDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
                 .addComponent(jbtnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -211,16 +274,16 @@ public class botoesEscolhas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(94, Short.MAX_VALUE)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(93, 93, 93))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         pack();
@@ -255,6 +318,12 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
             Formularios.cadastroVendedor.setVisible(true);
         }
+        else if(jLabelTitle.getText() == "Clientes"){
+            if(Formularios.cadastroCliente == null)
+            Formularios.cadastroCliente = new cadastroCliente();
+
+            Formularios.cadastroCliente.setVisible(true);
+        }
     }//GEN-LAST:event_jbtnInserirMouseClicked
 
     private void jbtnVizualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVizualizarActionPerformed
@@ -274,14 +343,20 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
             Formularios.tabelaVendedor.setVisible(true);
          }
+        else if(jLabelTitle.getText() == "Clientes"){
+            if(Formularios.tabelaCliente == null)
+                Formularios.tabelaCliente = new tabelaCliente();
+
+            Formularios.tabelaCliente.setVisible(true);
+         }
     }//GEN-LAST:event_jbtnVizualizarMouseClicked
 
     private void jbtnEditDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditDeleteActionPerformed
         if(jLabelTitle.getText() == "Conteúdos"){
-            if(Formularios.tabelaVendedorEditRemove == null)
-                Formularios.tabelaVendedorEditRemove = new tabelaVendedorEditRemove();
+            if(Formularios.tabelaConteudoEditRemove == null)
+                Formularios.tabelaConteudoEditRemove = new tabelaConteudoEditRemove();
 
-            Formularios.tabelaVendedorEditRemove.setVisible(true);
+            Formularios.tabelaConteudoEditRemove.setVisible(true);
         }
         else if(jLabelTitle.getText() == "Vendedores"){
             if(Formularios.tabelaVendedorEditRemove == null)
@@ -289,7 +364,25 @@ public class botoesEscolhas extends javax.swing.JFrame {
 
             Formularios.tabelaVendedorEditRemove.setVisible(true);
         }
+        else if(jLabelTitle.getText() == "Clientes"){
+            if(Formularios.tabelaClienteEditRemove == null)
+                Formularios.tabelaClienteEditRemove = new tabelaClienteEditRemove();
+
+            Formularios.tabelaClienteEditRemove.setVisible(true);
+        }
     }//GEN-LAST:event_jbtnEditDeleteActionPerformed
+
+    private void jbtnVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnVendedoresActionPerformed
+        jLabelTitle.setText("Vendedores");
+    }//GEN-LAST:event_jbtnVendedoresActionPerformed
+
+    private void jbtnConteudosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnConteudosActionPerformed
+        jLabelTitle.setText("Conteúdos");
+    }//GEN-LAST:event_jbtnConteudosActionPerformed
+
+    private void jbtnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClientesActionPerformed
+        jLabelTitle.setText("Clientes");
+    }//GEN-LAST:event_jbtnClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,8 +425,11 @@ public class botoesEscolhas extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelNameAcess;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jbtnClientes;
+    private javax.swing.JButton jbtnConteudos;
     private javax.swing.JButton jbtnEditDelete;
     private javax.swing.JButton jbtnInserir;
+    private javax.swing.JButton jbtnVendedores;
     private javax.swing.JButton jbtnVizualizar;
     private javax.swing.JButton jbtnVoltar;
     // End of variables declaration//GEN-END:variables

@@ -4,8 +4,10 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.dao.daoCliente;
 import com.mycompany.dao.daoConteudo;
 import com.mycompany.dao.daoVendedor;
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -24,7 +26,14 @@ public class tabelaCliente extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
-        listarVendedor();
+        
+        if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+            listarCliente();
+            jcbFiltro.addItem("ID_VENDEDOR");
+        }
+        else{
+            listarPorIdDoVendedor(Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+        }
         
         if(jcbFiltro.getSelectedIndex() == 0){
             jtfFiltro.setEnabled(false);
@@ -32,26 +41,27 @@ public class tabelaCliente extends javax.swing.JFrame {
         }
     }
     
-     public void listarVendedor(){
+     public void listarCliente(){
         try{
-            DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableVendedor.getModel();
+            DefaultTableModel defaulttablemodel = (DefaultTableModel) jTableCliente.getModel();
             
-            jTableVendedor.setModel(defaulttablemodel);
+            jTableCliente.setModel(defaulttablemodel);
             
-            daoVendedor daoVend = new daoVendedor();
+            daoCliente daoClie = new daoCliente();
             
-            ResultSet resultSet = daoVend.SelecionarTodos();
+            ResultSet resultset = daoClie.SelecionarTodos();
             
             defaulttablemodel.setRowCount(0);
             
-            while(resultSet.next()){
-                String id = resultSet.getString(1);
-                String nome = resultSet.getString(2);
-                String usuario = resultSet.getString(3);
-                String senha = resultSet.getString(4);
-                String totalCliente = resultSet.getString(5);
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
             }  
         }
         catch(Exception e){
@@ -59,55 +69,141 @@ public class tabelaCliente extends javax.swing.JFrame {
         }
     }
     
-    public void listarVendedorId(int vendedorId){
+    public void listarClienteId(int clienteId){
         try{
-            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableVendedor.getModel();
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
             
-            jTableVendedor.setModel(defaulttablemodel);
+            jTableCliente.setModel(defaulttablemodel);
             
-            daoVendedor daoVend = new daoVendedor();
+            daoCliente daoClie = new daoCliente();
             
-            ResultSet resultset = daoVend.SelecionarPorId(vendedorId);
+            ResultSet resultset = daoClie.SelecionarPorId(clienteId);
             
             defaulttablemodel.setRowCount(0);
+            
             while(resultset.next()){
                 String id = resultset.getString(1);
                 String nome = resultset.getString(2);
                 String usuario = resultset.getString(3);
                 String senha = resultset.getString(4);
-                String totalCliente = resultset.getString(5);
+                String id_vendedor = resultset.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
     
-    public void listarVendedorNome(String vendedorNome){
+    public void listarPorIdDoVendedor(int id_vendedorCliente){
         try{
-            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableVendedor.getModel();
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
             
-            jTableVendedor.setModel(defaulttablemodel);
+            jTableCliente.setModel(defaulttablemodel);
             
-            daoVendedor daoVend = new daoVendedor();
+            daoCliente daoClie = new daoCliente();
             
-            ResultSet resultset = daoVend.SelecionarPorVendedor(vendedorNome);
+            ResultSet resultset = daoClie.SelecionarPorIdVendedor(id_vendedorCliente);
             
             defaulttablemodel.setRowCount(0);
+            
             while(resultset.next()){
                 String id = resultset.getString(1);
                 String nome = resultset.getString(2);
                 String usuario = resultset.getString(3);
                 String senha = resultset.getString(4);
-                String totalCliente = resultset.getString(5);
+                String id_vendedor = resultset.getString(5);
                 
-                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, totalCliente});
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
+    
+    public void listarClienteNome(String clienteNome){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
+            
+            jTableCliente.setModel(defaulttablemodel);
+            
+            daoCliente daoClie = new daoCliente();
+            
+            ResultSet resultset = daoClie.SelecionarPorCliente(clienteNome);
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
+                
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarClienteNomeVendedorLogado(String clienteNomeVendedorLogado){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
+            
+            jTableCliente.setModel(defaulttablemodel);
+            
+            daoCliente daoClie = new daoCliente();
+            
+            ResultSet resultset = daoClie.SelecionarPorNomeDoVendedorLogado(clienteNomeVendedorLogado, Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
+                
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarClienteIdVendedorLogado(int clienteIdVendedorLogado){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
+            
+            jTableCliente.setModel(defaulttablemodel);
+            
+            daoCliente daoClie = new daoCliente();
+            
+            ResultSet resultset = daoClie.SelecionarPorIdDoVendedorLogado(clienteIdVendedorLogado, Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
+                
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,7 +218,7 @@ public class tabelaCliente extends javax.swing.JFrame {
         jtfFiltro = new javax.swing.JTextField();
         jbtnFiltrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableVendedor = new javax.swing.JTable();
+        jTableCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -168,13 +264,13 @@ public class tabelaCliente extends javax.swing.JFrame {
             }
         });
 
-        jTableVendedor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jTableVendedor.setModel(new javax.swing.table.DefaultTableModel(
+        jTableCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "NOME", "USUARIO", "SENHA", "TOTAL CLIENTES"
+                "ID", "NOME", "USUARIO", "SENHA", "ID DO VENDEDOR"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -185,12 +281,12 @@ public class tabelaCliente extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTableVendedor.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTableCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableVendedorMouseClicked(evt);
+                jTableClienteMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTableVendedor);
+        jScrollPane1.setViewportView(jTableCliente);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -256,19 +352,24 @@ public class tabelaCliente extends javax.swing.JFrame {
         else{
             jtfFiltro.setEnabled(false);
             jtfFiltro.setText("");
-            listarVendedor();
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+            listarCliente();
+        }
+            else{
+                listarPorIdDoVendedor(Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            }
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
 
-    private void jTableVendedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableVendedorMouseClicked
+    private void jTableClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableClienteMouseClicked
         if(evt.getClickCount() == 2){
-            if(Formularios.editModeVendedor == null){
-                Formularios.editModeVendedor = new editModeVendedor();
+            if(Formularios.editModeCliente == null){
+                Formularios.editModeCliente = new editModeCliente();
                 
-                Formularios.editModeVendedor.setVisible(true);
+                Formularios.editModeCliente.setVisible(true);
             }
         }
-    }//GEN-LAST:event_jTableVendedorMouseClicked
+    }//GEN-LAST:event_jTableClienteMouseClicked
 
     private void jtfFiltroInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jtfFiltroInputMethodTextChanged
     }//GEN-LAST:event_jtfFiltroInputMethodTextChanged
@@ -279,10 +380,25 @@ public class tabelaCliente extends javax.swing.JFrame {
 
     private void jbtnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFiltrarActionPerformed
         if(jcbFiltro.getSelectedIndex() == 1){
-            listarVendedorId(Integer.parseInt(jtfFiltro.getText()));
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+                listarClienteId(Integer.parseInt(jtfFiltro.getText()));
+            }
+            else{
+                listarClienteIdVendedorLogado(Integer.parseInt(jtfFiltro.getText()));
+            }
         }
+        
         else if(jcbFiltro.getSelectedIndex() == 2){
-            listarVendedorNome(jtfFiltro.getText());
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+                listarClienteNome(jtfFiltro.getText());
+            }
+            else{
+                listarClienteNomeVendedorLogado(jtfFiltro.getText());
+            }
+        }
+        
+        else if(jcbFiltro.getSelectedIndex() == 3){
+                listarPorIdDoVendedor(Integer.parseInt(jtfFiltro.getText()));
         }
     }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
@@ -327,7 +443,7 @@ public class tabelaCliente extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableVendedor;
+    private javax.swing.JTable jTableCliente;
     private javax.swing.JButton jbtnFiltrar;
     private javax.swing.JComboBox<String> jcbFiltro;
     private javax.swing.JTextField jtfFiltro;

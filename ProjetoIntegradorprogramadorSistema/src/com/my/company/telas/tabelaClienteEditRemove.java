@@ -10,6 +10,7 @@ import com.mycompany.dao.daoVendedor;
 import com.mycompany.modelo.modeloCliente;
 import com.mycompany.modelo.modeloConteudo;
 import com.mycompany.modelo.modeloVendedor;
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.Temporarios;
 import java.sql.ResultSet;
@@ -29,7 +30,14 @@ public class tabelaClienteEditRemove extends javax.swing.JFrame {
         initComponents();
         setExtendedState(MAXIMIZED_BOTH);
         setResizable(false);
-        listarCliente();
+        
+        if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+            listarCliente();
+            jcbFiltro.addItem("ID_VENDEDOR");
+        }
+        else{
+            listarPorIdDoVendedor(Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+        }
         
         if(jcbFiltro.getSelectedIndex() == 0){
             jtfFiltro.setEnabled(false);
@@ -144,6 +152,60 @@ public class tabelaClienteEditRemove extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+    
+    public void listarClienteNomeVendedorLogado(String clienteNomeVendedorLogado){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
+            
+            jTableCliente.setModel(defaulttablemodel);
+            
+            daoCliente daoClie = new daoCliente();
+            
+            ResultSet resultset = daoClie.SelecionarPorNomeDoVendedorLogado(clienteNomeVendedorLogado, Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
+                
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void listarClienteIdVendedorLogado(int clienteIdVendedorLogado){
+        try{
+            DefaultTableModel defaulttablemodel =  (DefaultTableModel) jTableCliente.getModel();
+            
+            jTableCliente.setModel(defaulttablemodel);
+            
+            daoCliente daoClie = new daoCliente();
+            
+            ResultSet resultset = daoClie.SelecionarPorIdDoVendedorLogado(clienteIdVendedorLogado, Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            
+            defaulttablemodel.setRowCount(0);
+            
+            while(resultset.next()){
+                String id = resultset.getString(1);
+                String nome = resultset.getString(2);
+                String usuario = resultset.getString(3);
+                String senha = resultset.getString(4);
+                String id_vendedor = resultset.getString(5);
+                
+                
+                defaulttablemodel.addRow(new Object[]{id, nome, usuario, senha, id_vendedor});
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,6 +247,11 @@ public class tabelaClienteEditRemove extends javax.swing.JFrame {
         jcbFiltro.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbFiltroItemStateChanged(evt);
+            }
+        });
+        jcbFiltro.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jcbFiltroComponentShown(evt);
             }
         });
         jcbFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -309,19 +376,35 @@ public class tabelaClienteEditRemove extends javax.swing.JFrame {
         else{
             jtfFiltro.setEnabled(false);
             jtfFiltro.setText("");
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
             listarCliente();
+        }
+            else{
+                listarPorIdDoVendedor(Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+            }
         }
     }//GEN-LAST:event_jcbFiltroItemStateChanged
 
     private void jbtnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnFiltrarActionPerformed
         if(jcbFiltro.getSelectedIndex() == 1){
-            listarClienteId(Integer.parseInt(jtfFiltro.getText()));
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+                listarClienteId(Integer.parseInt(jtfFiltro.getText()));
+            }
+            else{
+                listarClienteIdVendedorLogado(Integer.parseInt(jtfFiltro.getText()));
+            }
         }
+        
         else if(jcbFiltro.getSelectedIndex() == 2){
-            listarClienteNome(jtfFiltro.getText());
+            if(Constantes.LOGIN_TYPE.equals(Constantes.LOGIN_ADM)){
+                listarClienteNome(jtfFiltro.getText());
+            }
+            else{
+                listarClienteNomeVendedorLogado(jtfFiltro.getText());
+            }
         }
         else if(jcbFiltro.getSelectedIndex() == 3){
-            listarPorIdDoVendedor(Integer.parseInt(jtfFiltro.getText()));
+                listarPorIdDoVendedor(Integer.parseInt(jtfFiltro.getText()));
         }
     }//GEN-LAST:event_jbtnFiltrarActionPerformed
 
@@ -344,6 +427,10 @@ public class tabelaClienteEditRemove extends javax.swing.JFrame {
             cadastrocliente.setVisible(true);
         }
     }//GEN-LAST:event_jTableClienteMouseClicked
+
+    private void jcbFiltroComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jcbFiltroComponentShown
+        
+    }//GEN-LAST:event_jcbFiltroComponentShown
 
     /**
      * @param args the command line arguments

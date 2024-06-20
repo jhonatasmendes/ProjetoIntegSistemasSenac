@@ -10,6 +10,7 @@ import com.mycompany.utilidades.BancoDeDadosMySql;
 import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
 /**
@@ -206,24 +207,32 @@ public class login extends javax.swing.JFrame {
             Formularios.menu = new menu();
             
         Formularios.menu.setVisible(true);
+        
+        Constantes.ID_VENDEDOR_LOGADO = "0";
         }
         else if (verificarLoginVendedor(userNome, userSenha)) {
-            JOptionPane.showMessageDialog(null, "Logado como vendedor.");
-            Constantes.LOGIN_TYPE = Constantes.LOGIN_VENDEDOR;
+            try{
+                JOptionPane.showMessageDialog(null, "Logado como vendedor.");
+                Constantes.LOGIN_TYPE = Constantes.LOGIN_VENDEDOR;
 
-            this.dispose();
-            jtfUsuario.setText("");
-            jtfSenha.setText("");
-            
-            if(Formularios.menu == null)
-            Formularios.menu = new menu();
-            
-            Formularios.menu.setVisible(true);
-        
-            daoLoginVerificacao daoLogin = new daoLoginVerificacao();
-            
-            ResultSet resultset = daoLogin.idVendedorLogado(userNome, userSenha);
+                this.dispose();
+                jtfUsuario.setText("");
+                jtfSenha.setText("");
 
+                if(Formularios.menu == null)
+                Formularios.menu = new menu();
+
+                Formularios.menu.setVisible(true);
+
+                daoLoginVerificacao daoLogin = new daoLoginVerificacao();
+
+                ResultSet resultset = daoLogin.idVendedorLogado(userNome, userSenha);
+
+                resultset.next();
+                Constantes.ID_VENDEDOR_LOGADO = resultset.getString("v.id");
+            }catch(SQLException e){
+                System.out.println(e.getMessage());
+            }
             
         }
         else if (verificarLoginCliente(userNome, userSenha)) {

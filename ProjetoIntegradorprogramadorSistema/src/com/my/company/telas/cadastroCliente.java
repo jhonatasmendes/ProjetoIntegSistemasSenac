@@ -10,6 +10,7 @@ import com.mycompany.dao.daoVendedor;
 import com.mycompany.modelo.modeloCliente;
 import com.mycompany.modelo.modeloConteudo;
 import com.mycompany.modelo.modeloVendedor;
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 import com.mycompany.utilidades.Temporarios;
 import javax.swing.JOptionPane;
@@ -39,6 +40,7 @@ public class cadastroCliente extends javax.swing.JFrame {
             int id = daoClie.ProximoIdCliente();
             if(id >= 0)
                 jtfIdCliente.setText(String.valueOf(id));
+                jtfIdClienteVendedor.setText(Constantes.ID_VENDEDOR_LOGADO);
                 
                 jbtSalvarOrAdd2.setText("Cadastrar Cliente");
                 jbtnDelete2.setVisible(false);
@@ -77,6 +79,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         
         if(daoClie.inserir(Integer.parseInt(jtfIdCliente.getText()), String.valueOf(jtfNomeCliente.getText()), jtfUsuarioCliente.getText(), jtfSenhaCliente.getText(), Integer.parseInt(jtfIdClienteVendedor.getText()))){
             jtfIdCliente.setText(String.valueOf(daoClie.ProximoIdCliente()));
+            jtfIdClienteVendedor.setText(String.valueOf(Constantes.ID_VENDEDOR_LOGADO));
             jtfNomeCliente.setText("");
             jtfUsuarioCliente.setText("");
             jtfSenhaCliente.setText("");
@@ -96,8 +99,9 @@ public class cadastroCliente extends javax.swing.JFrame {
     private void alterarCliente(){
         daoCliente daoClie = new daoCliente();
         
-        if(daoClie.inserir(Integer.parseInt(jtfIdCliente.getText()), String.valueOf(jtfNomeCliente.getText()), jtfUsuarioCliente.getText(), jtfSenhaCliente.getText(), Integer.parseInt(jtfIdClienteVendedor.getText()))){
+        if(daoClie.alterar(Integer.parseInt(jtfIdCliente.getText()), String.valueOf(jtfNomeCliente.getText()), jtfUsuarioCliente.getText(), jtfSenhaCliente.getText(), Integer.parseInt(jtfIdClienteVendedor.getText()))){
             jtfIdCliente.setText(String.valueOf(daoClie.ProximoIdCliente()));
+            jtfIdClienteVendedor.setText(Constantes.ID_VENDEDOR_LOGADO);
             jtfNomeCliente.setText("");
             jtfUsuarioCliente.setText("");
             jtfSenhaCliente.setText("");
@@ -106,6 +110,7 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         else{
             jtfIdCliente.setText(String.valueOf(daoClie.ProximoIdCliente()));
+            jtfIdClienteVendedor.setText(Constantes.ID_VENDEDOR_LOGADO);
             jtfNomeCliente.setText("");
             jtfUsuarioCliente.setText("");
             jtfSenhaCliente.setText("");
@@ -435,7 +440,7 @@ public class cadastroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jbtSalvarOrAdd2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jbtSalvarOrAdd2MouseClicked
-        if(jbtSalvarOrAdd2.getText().equals("Cadastrar Vendedor")){
+        if(jbtSalvarOrAdd2.getText().equals("Cadastrar Cliente")){
             if("".equals(jtfNomeCliente.getText())){
                 JOptionPane.showMessageDialog(null, "Insira um nome para o vendedor.");
             }

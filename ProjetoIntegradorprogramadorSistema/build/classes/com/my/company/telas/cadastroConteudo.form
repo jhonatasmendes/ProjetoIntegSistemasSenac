@@ -148,12 +148,32 @@
         <Component class="javax.swing.JComboBox" name="jcbCategoria">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
+              <StringArray count="25">
                 <StringItem index="0" value="*Selecione uma categoria"/>
-                <StringItem index="1" value="Canais"/>
-                <StringItem index="2" value="Filmes"/>
-                <StringItem index="3" value="Jogos"/>
-                <StringItem index="4" value="Series/Novelas"/>
+                <StringItem index="1" value="Anime"/>
+                <StringItem index="2" value="Aplicativo"/>
+                <StringItem index="3" value="Artigo"/>
+                <StringItem index="4" value="Blog"/>
+                <StringItem index="5" value="Curso"/>
+                <StringItem index="6" value="Desenho Animado"/>
+                <StringItem index="7" value="Document&#xe1;rio"/>
+                <StringItem index="8" value="Evento ao vivo"/>
+                <StringItem index="9" value="Evento esportivo"/>
+                <StringItem index="10" value="Filme"/>
+                <StringItem index="11" value="Hist&#xf3;ria em Quadrinhos"/>
+                <StringItem index="12" value="Jogo de v&#xed;deo"/>
+                <StringItem index="13" value="Livro"/>
+                <StringItem index="14" value="M&#xfa;sica"/>
+                <StringItem index="15" value="Podcast"/>
+                <StringItem index="16" value="Podcast de Entrevista"/>
+                <StringItem index="17" value="Programa de TV"/>
+                <StringItem index="18" value="Reality Show"/>
+                <StringItem index="19" value="Rede social"/>
+                <StringItem index="20" value="Revista"/>
+                <StringItem index="21" value="S&#xe9;rie"/>
+                <StringItem index="22" value="Teatro"/>
+                <StringItem index="23" value="Tutorial Online"/>
+                <StringItem index="24" value="Webcomic"/>
               </StringArray>
             </Property>
           </Properties>
@@ -218,14 +238,32 @@
         <Component class="javax.swing.JComboBox" name="jcbGenero">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="7">
+              <StringArray count="25">
                 <StringItem index="0" value="*Selecione um g&#xea;nero"/>
-                <StringItem index="1" value="Adulto"/>
-                <StringItem index="2" value="A&#xe7;&#xe3;o"/>
-                <StringItem index="3" value="Com&#xe9;dia"/>
-                <StringItem index="4" value="Esporte"/>
-                <StringItem index="5" value="Infantil"/>
-                <StringItem index="6" value="Terror"/>
+                <StringItem index="1" value="A&#xe7;&#xe3;o"/>
+                <StringItem index="2" value="Anima&#xe7;&#xe3;o"/>
+                <StringItem index="3" value="Aventura"/>
+                <StringItem index="4" value="Biografia"/>
+                <StringItem index="5" value="Document&#xe1;rio"/>
+                <StringItem index="6" value="Drama"/>
+                <StringItem index="7" value="Esporte"/>
+                <StringItem index="8" value="Fam&#xed;lia"/>
+                <StringItem index="9" value="Fantasia"/>
+                <StringItem index="10" value="Fantasia Cient&#xed;fica"/>
+                <StringItem index="11" value="Fic&#xe7;&#xe3;o Cient&#xed;fica"/>
+                <StringItem index="12" value="Guerra"/>
+                <StringItem index="13" value="Hist&#xf3;rico"/>
+                <StringItem index="14" value="Mist&#xe9;rio"/>
+                <StringItem index="15" value="Musical"/>
+                <StringItem index="16" value="Noir"/>
+                <StringItem index="17" value="Policial"/>
+                <StringItem index="18" value="Reality Show"/>
+                <StringItem index="19" value="Romance"/>
+                <StringItem index="20" value="Talk Show"/>
+                <StringItem index="21" value="Terror"/>
+                <StringItem index="22" value="Thriller"/>
+                <StringItem index="23" value="Variedades"/>
+                <StringItem index="24" value="Western"/>
               </StringArray>
             </Property>
           </Properties>

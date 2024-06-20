@@ -41,14 +41,15 @@ public class daoCliente {
     }
       public Boolean alterar (int id, String nome, String usuario, String senha, int id_vendedor){
         try{
-            sql= "UPDATE cliente set nome = ?, usuario = ?, senha = ? where id = ?";
+            sql= "UPDATE cliente set nome = ?, usuario = ?, senha = ?, id_vendedor = ? where id = ?";
             
             setStatement(getConexao().prepareStatement(sql));
             
-            getStatement().setInt(4, id);
+            getStatement().setInt(5, id);
             getStatement().setString(1, nome);
             getStatement().setString(2, usuario);
             getStatement().setString(3, senha);
+            getStatement().setInt(4, id_vendedor);
             
             getStatement().executeUpdate();
             return true;
@@ -104,6 +105,52 @@ public class daoCliente {
             setStatement(getConexao().prepareStatement(sql));
             
             getStatement().setInt(1, id);
+            
+            getStatement().executeQuery();
+            
+            setResultado(getStatement().executeQuery());
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return getResultado();
+    }
+   
+   public ResultSet SelecionarPorIdDoVendedorLogado(int id, int id_vendedor){
+        try{
+            sql= """
+                 select c.id, c.nome, c.usuario, c.senha, c.id_vendedor
+                 from cliente c
+                 left join vendedor v  ON c.id_vendedor = v.id
+                 	where c.id like ? and c.id_vendedor like ?
+                 """;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setInt(1, id);
+            getStatement().setInt(2, id_vendedor);
+            
+            getStatement().executeQuery();
+            
+            setResultado(getStatement().executeQuery());
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return getResultado();
+    }
+   
+   public ResultSet SelecionarPorNomeDoVendedorLogado(String nomeCliente, int id_vendedor){
+        try{
+            sql= """
+                 select c.id, c.nome, c.usuario, c.senha, c.id_vendedor
+                                 from cliente c
+                                 left join vendedor v  ON c.id_vendedor = v.id
+                                 	where c.nome like ? and c.id_vendedor like ?
+                 """;
+            
+            setStatement(getConexao().prepareStatement(sql));
+            
+            getStatement().setString(1, nomeCliente + "%" );
+            getStatement().setInt(2, id_vendedor);
             
             getStatement().executeQuery();
             
@@ -179,5 +226,9 @@ public class daoCliente {
         }
         
         return id;
+    }
+
+    public ResultSet SelecionarPorNomeDoVendedorLogado(int clienteIdVendedorLogado, int parseInt) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

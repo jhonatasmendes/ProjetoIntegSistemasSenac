@@ -166,7 +166,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
             }
         });
 
-        jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Selecione uma categoria", "Canais", "Filmes", "Jogos", "Series/Novelas" }));
+        jcbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Selecione uma categoria", "Anime", "Aplicativo", "Artigo", "Blog", "Curso", "Desenho Animado", "Documentário", "Evento ao vivo", "Evento esportivo", "Filme", "História em Quadrinhos", "Jogo de vídeo", "Livro", "Música", "Podcast", "Podcast de Entrevista", "Programa de TV", "Reality Show", "Rede social", "Revista", "Série", "Teatro", "Tutorial Online", "Webcomic" }));
         jcbCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbCategoriaActionPerformed(evt);
@@ -213,7 +213,7 @@ public class cadastroConteudo extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Gênero");
 
-        jcbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Selecione um gênero", "Adulto", "Ação", "Comédia", "Esporte", "Infantil", "Terror" }));
+        jcbGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "*Selecione um gênero", "Ação", "Animação", "Aventura", "Biografia", "Documentário", "Drama", "Esporte", "Família", "Fantasia", "Fantasia Científica", "Ficção Científica", "Guerra", "Histórico", "Mistério", "Musical", "Noir", "Policial", "Reality Show", "Romance", "Talk Show", "Terror", "Thriller", "Variedades", "Western" }));
         jcbGenero.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbGeneroActionPerformed(evt);

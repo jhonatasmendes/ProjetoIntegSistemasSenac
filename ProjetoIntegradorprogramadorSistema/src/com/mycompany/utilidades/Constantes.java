@@ -14,4 +14,7 @@ public class Constantes {
     public static String LOGIN_CLIENTE = "Cliente";
     
     public static String LOGIN_TYPE;
+    
+    
+    public static String ID_VENDEDOR_LOGADO;
 }                   

@@ -32,7 +32,7 @@ public class editModeVendedor extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnTabelaEdicaoVend = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,11 +61,11 @@ public class editModeVendedor extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Ir para a tabela de edição");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtnTabelaEdicaoVend.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnTabelaEdicaoVend.setText("Ir para a tabela de edição");
+        jbtnTabelaEdicaoVend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtnTabelaEdicaoVendActionPerformed(evt);
             }
         });
 
@@ -79,7 +79,7 @@ public class editModeVendedor extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(127, 127, 127)
-                        .addComponent(jButton2)
+                        .addComponent(jbtnTabelaEdicaoVend)
                         .addGap(64, 64, 64))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -93,7 +93,7 @@ public class editModeVendedor extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnTabelaEdicaoVend, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -108,7 +108,7 @@ public class editModeVendedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1AncestorAdded
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtnTabelaEdicaoVendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTabelaEdicaoVendActionPerformed
         this.dispose();
         Formularios.tabelaVendedor.dispose();
         
@@ -116,7 +116,7 @@ public class editModeVendedor extends javax.swing.JFrame {
             Formularios.tabelaVendedorEditRemove = new tabelaVendedorEditRemove();
         
         Formularios.tabelaVendedorEditRemove.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtnTabelaEdicaoVendActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.editModeVendedor = null;
@@ -160,7 +160,7 @@ public class editModeVendedor extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbtnTabelaEdicaoVend;
     // End of variables declaration//GEN-END:variables
 }

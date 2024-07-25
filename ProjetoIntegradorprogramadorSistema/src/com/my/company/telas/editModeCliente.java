@@ -4,6 +4,7 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 
 /**
@@ -19,6 +20,13 @@ public class editModeCliente extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        
+        if(Constantes.LOGIN_TYPE == Constantes.LOGIN_CLIENTE){
+            jbtnTabelaEditCliente.setEnabled(false);
+        }
+        else{
+            jbtnTabelaEditCliente.setEnabled(true);
+        }
     }
 
     /**
@@ -32,7 +40,7 @@ public class editModeCliente extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnTabelaEditCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,11 +69,11 @@ public class editModeCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Ir para a tabela de edição");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtnTabelaEditCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnTabelaEditCliente.setText("Ir para a tabela de edição");
+        jbtnTabelaEditCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtnTabelaEditClienteActionPerformed(evt);
             }
         });
 
@@ -79,7 +87,7 @@ public class editModeCliente extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(127, 127, 127)
-                        .addComponent(jButton2)
+                        .addComponent(jbtnTabelaEditCliente)
                         .addGap(64, 64, 64))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -93,7 +101,7 @@ public class editModeCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnTabelaEditCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -108,7 +116,7 @@ public class editModeCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1AncestorAdded
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtnTabelaEditClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTabelaEditClienteActionPerformed
         this.dispose();
         Formularios.tabelaCliente.dispose();
         
@@ -116,7 +124,7 @@ public class editModeCliente extends javax.swing.JFrame {
             Formularios.tabelaClienteEditRemove = new tabelaClienteEditRemove();
         
         Formularios.tabelaClienteEditRemove.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtnTabelaEditClienteActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.editModeCliente = null;
@@ -162,7 +170,7 @@ public class editModeCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbtnTabelaEditCliente;
     // End of variables declaration//GEN-END:variables
 }

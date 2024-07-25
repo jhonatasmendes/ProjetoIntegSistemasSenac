@@ -119,7 +119,13 @@ public class cadastroCliente extends javax.swing.JFrame {
         }
         
         dispose();
-        ((tabelaClienteEditRemove)Formularios.tabelaClienteEditRemove).listarCliente();
+        
+        if(Constantes.LOGIN_TYPE == Constantes.LOGIN_ADM){
+            ((tabelaClienteEditRemove)Formularios.tabelaClienteEditRemove).listarCliente();
+        }
+        else{
+            ((tabelaClienteEditRemove)Formularios.tabelaClienteEditRemove).listarPorIdDoVendedor(Integer.parseInt(Constantes.ID_VENDEDOR_LOGADO));
+        }
     }
     
       private void deletarCliente(){

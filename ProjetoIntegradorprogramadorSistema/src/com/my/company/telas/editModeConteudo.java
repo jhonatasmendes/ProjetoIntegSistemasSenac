@@ -4,6 +4,7 @@
  */
 package com.my.company.telas;
 
+import com.mycompany.utilidades.Constantes;
 import com.mycompany.utilidades.Formularios;
 
 /**
@@ -19,6 +20,13 @@ public class editModeConteudo extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        
+        if(Constantes.LOGIN_TYPE == Constantes.LOGIN_CLIENTE || Constantes.LOGIN_TYPE == Constantes.LOGIN_VENDEDOR){
+            jbtnTabelaEdicaoCont.setEnabled(false);
+        }
+        else{
+            jbtnTabelaEdicaoCont.setEnabled(true);
+        }
     }
 
     /**
@@ -32,7 +40,7 @@ public class editModeConteudo extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jbtnTabelaEdicaoCont = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -61,11 +69,11 @@ public class editModeConteudo extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setText("Ir para a tabela de edição");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jbtnTabelaEdicaoCont.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbtnTabelaEdicaoCont.setText("Ir para a tabela de edição");
+        jbtnTabelaEdicaoCont.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jbtnTabelaEdicaoContActionPerformed(evt);
             }
         });
 
@@ -79,7 +87,7 @@ public class editModeConteudo extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(127, 127, 127)
-                        .addComponent(jButton2)
+                        .addComponent(jbtnTabelaEdicaoCont)
                         .addGap(64, 64, 64))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -93,7 +101,7 @@ public class editModeConteudo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtnTabelaEdicaoCont, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
         );
 
@@ -108,7 +116,7 @@ public class editModeConteudo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1AncestorAdded
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jbtnTabelaEdicaoContActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnTabelaEdicaoContActionPerformed
         this.dispose();
         Formularios.tabelaConteudo.dispose();
         
@@ -116,7 +124,7 @@ public class editModeConteudo extends javax.swing.JFrame {
             Formularios.tabelaConteudoEditRemove = new tabelaConteudoEditRemove();
         
         Formularios.tabelaConteudoEditRemove.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jbtnTabelaEdicaoContActionPerformed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         Formularios.editModeConteudo = null;
@@ -159,7 +167,7 @@ public class editModeConteudo extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jbtnTabelaEdicaoCont;
     // End of variables declaration//GEN-END:variables
 }
